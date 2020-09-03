@@ -9,6 +9,9 @@
         >
       </v-container>
       <v-list>
+        <v-subheader v-if="items.length > 0" style="margin-top: -12px"
+          >COMERCIO ADHERIDO: UserStory Food</v-subheader
+        >
         <v-list-item v-for="(item, key) in items" :key="item.id">
           <v-list-item-avatar>
             <v-img :src="item.avatar"></v-img>
@@ -46,23 +49,30 @@
 
 <script>
 import swal from "sweetalert";
+import CocaCola from "../assets/cocacola.jpeg";
+import Hamburguesa from "../assets/hamburguesa.jpg";
+import Pizza from "../assets/pizza.jpeg";
 export default {
   data() {
     return {
       items: [
         {
           id: 1,
-          name: "Articulo 1",
-          subtitle: "Cantidad: 2 - $125",
-          avatar:
-            "https://scontent.fcor3-1.fna.fbcdn.net/v/t1.0-9/10155657_10206531880394586_1684537497252052375_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=CH9EUke0uFwAX-QEXnT&_nc_oc=AQnygHhtP1kSIoHKHzNO14G6gQVhB6ixc-w-L5geNciSDUvdaXbesaTPzQ7rmtvy4qc&_nc_ht=scontent.fcor3-1.fna&oh=b90e66937a39e32df9552a705392bf8a&oe=5F74C966",
+          name: "Hamburguesa",
+          subtitle: "Cantidad: 2 - $600",
+          avatar: Hamburguesa,
         },
         {
           id: 2,
-          name: "Articulo 2",
-          subtitle: "Cantidad: 2 - $125",
-          avatar:
-            "https://scontent.fcor3-1.fna.fbcdn.net/v/t1.0-9/10155657_10206531880394586_1684537497252052375_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=CH9EUke0uFwAX-QEXnT&_nc_oc=AQnygHhtP1kSIoHKHzNO14G6gQVhB6ixc-w-L5geNciSDUvdaXbesaTPzQ7rmtvy4qc&_nc_ht=scontent.fcor3-1.fna&oh=b90e66937a39e32df9552a705392bf8a&oe=5F74C966",
+          name: "Pizza",
+          subtitle: "Cantidad: 1 - $325",
+          avatar: Pizza,
+        },
+        {
+          id: 3,
+          name: "Coca-Cola",
+          subtitle: "Cantidad: 5 - $500",
+          avatar: CocaCola,
         },
       ],
     };
