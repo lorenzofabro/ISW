@@ -1,60 +1,42 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+  <v-app style="font-family: ProximaNova !important; background-color: #EBEBEB">
+    <v-app-bar app dark>
+      <v-toolbar-title class="title"
+        ><span class="yellow--text text--darken-2">DELIVERY</span
+        ><span class="yellow--text text--lighten-2">EAT</span
+        >🍔</v-toolbar-title
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="$router.push({ name: 'Main' })">
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
+    <v-main class="mt-5">
+      <v-scroll-y-transition mode="out-in">
+        <router-view></router-view>
+      </v-scroll-y-transition>
     </v-main>
+    <Footer />
   </v-app>
 </template>
 
+<style>
+@font-face {
+  font-family: "ProximaNova";
+  src: url("~@/assets/ProximaNova-Regular.otf");
+}
+</style>
+
 <script>
-import HelloWorld from './components/HelloWorld';
-
+import Footer from "./views/Footer";
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
+  components: { Footer },
+  name: "App",
 };
 </script>
