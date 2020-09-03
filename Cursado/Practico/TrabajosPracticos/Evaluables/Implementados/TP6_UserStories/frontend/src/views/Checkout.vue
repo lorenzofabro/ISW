@@ -206,9 +206,21 @@ export default {
   },
   methods: {
     realizarPedido() {
+      const fullDateStr = `${this.date} ${this.time}`;
+      const fullDate = new Date(fullDateStr);
       let validate = this.$refs.form.validate();
       if (this.formaPago === "Tarjeta de crédito" && !this.card) {
-        swal("Los datos de la tarjeta no son correctos 😢", "", "error");
+        swal(
+          "Ha ocurrido un error 😢",
+          "Los datos de la tarjeta no son correctos",
+          "error"
+        );
+      } else if (this.formaEntrega === "Programar" && fullDate < new Date()) {
+        swal(
+          "Ha ocurrido un error 😢",
+          "La fecha y hora no es válida",
+          "error"
+        );
       } else if (validate) {
         swal(
           "Pedido realizado exitosamente 😁",
