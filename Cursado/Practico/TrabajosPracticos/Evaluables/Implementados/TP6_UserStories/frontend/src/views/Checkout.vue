@@ -115,6 +115,9 @@
           </v-col>
         </v-row>
         <Divider title="Forma de pago" />
+        <span class="mx-5 text-uppercase float-right"
+          >Total: ${{ $route.params.total }}</span
+        >
         <v-row class="rowMargin">
           <v-col cols="6">
             <v-select
@@ -131,7 +134,9 @@
           </v-col>
           <v-col cols="6">
             <v-text-field
+              v-model="pagoCon"
               label="Pago con *"
+              type="number"
               outlined
               v-if="formaPago === 'Efectivo'"
               :rules="[
@@ -202,10 +207,12 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       time: "14:30",
       valid: true,
+      pagoCon: "",
     };
   },
   methods: {
     realizarPedido() {
+      const total = this.$route.params.total;
       const fullDateStr = `${this.date} ${this.time}`;
       const fullDate = new Date(fullDateStr);
       let validate = this.$refs.form.validate();
@@ -215,13 +222,21 @@ export default {
           "Los datos de la tarjeta no son correctos",
           "error"
         );
+      } else if (this.formaPago === "Efectivo" && total > this.pagoCon) {
+        swal(
+          "Ha ocurrido un error 😢",
+          "El monto del pedido es mayor al indicado con el cual va a pagar",
+          "error"
+        );
       } else if (this.formaEntrega === "Programar" && fullDate < new Date()) {
         swal(
           "Ha ocurrido un error 😢",
           "La fecha y hora no es válida",
           "error"
         );
-      } else if (validate) {
+      } else if (!validate) {
+        swal("Ha ocurrido un error 😢", "Faltan campos obligatorios", "error");
+      } else {
         swal(
           "Pedido realizado exitosamente 😁",
           "¡Tu pedido está en camino!",

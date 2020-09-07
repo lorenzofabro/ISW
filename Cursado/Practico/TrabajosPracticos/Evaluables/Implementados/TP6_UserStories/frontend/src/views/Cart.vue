@@ -28,6 +28,13 @@
             </v-btn>
           </v-list-item-action>
         </v-list-item>
+        <v-list-item v-if="items.length > 0" class="mt-3">
+          <v-list-item-content>
+            <v-list-item-title class="title"
+              >Total: ${{ getTotal }}</v-list-item-title
+            >
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item v-if="items.length === 0">
           <v-list-item-content>
             <v-list-item-title class="text-center" style="margin-top: -12px"
@@ -60,18 +67,21 @@ export default {
           id: 1,
           name: "Hamburguesa",
           subtitle: "Cantidad: 2 - $600",
+          price: 600,
           avatar: Hamburguesa,
         },
         {
           id: 2,
           name: "Pizza",
           subtitle: "Cantidad: 1 - $325",
+          price: 325,
           avatar: Pizza,
         },
         {
           id: 3,
           name: "Coca-Cola",
           subtitle: "Cantidad: 5 - $500",
+          price: 500,
           avatar: CocaCola,
         },
       ],
@@ -83,12 +93,26 @@ export default {
       this.items.splice(index, 1);
     },
     pay() {
-      console.log(this.items.length);
       if (this.items.length === 0) {
         swal("Debe ingresar al menos un item al carrito", "", "warning");
       } else {
-        this.$router.push({ name: "Checkout" });
+        this.$router.push({
+          name: "Checkout",
+          params: {
+            total: this.getTotal,
+          },
+        });
       }
+    },
+  },
+
+  computed: {
+    getTotal() {
+      let price = 0;
+      this.items.forEach((i) => {
+        price += i.price;
+      });
+      return price;
     },
   },
 };

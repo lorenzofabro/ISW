@@ -10,12 +10,14 @@
       <v-btn icon @click="$router.push({ name: 'Main' })">
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+      <v-btn icon class="mx-2" @click="dialogInfo = true">
+        <v-icon>mdi-information</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-dialog v-model="dialogInfo" max-width="1024px">
+        <v-card color="#EBEBEB" outlined>
+          <v-img :src="userStory" shrink></v-img>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
     <v-main class="mt-5">
       <v-scroll-y-transition mode="out-in">
@@ -35,8 +37,15 @@
 
 <script>
 import Footer from "./views/Footer";
+import UserStory from "./assets/userstory.png";
 export default {
   components: { Footer },
   name: "App",
+  data() {
+    return {
+      userStory: UserStory,
+      dialogInfo: false,
+    };
+  },
 };
 </script>

@@ -13,7 +13,7 @@ const routes = [
     component: Main
   },
   {
-    path: '/checkout',
+    path: '/checkout/:total',
     name: 'Checkout',
     component: Checkout
   },
